@@ -9,9 +9,9 @@ const ContactsList = ({ contacts, handleDelete }) => {
             {contacts.map(contact => (
             <li key={contact.id}>
                 <div className={s.contact}>
-                <span className={s.contact_name}>{contact.name}</span>
+                <span className={s.contact_name}>{contact.name} -</span>
                 <span className={s.contact_number}>{contact.number}</span>
-                <button onClick={() => handleDelete(contact.id)}>Delete</button>
+                <button className={s.btn} onClick={() => handleDelete(contact.id)}>X</button>
                 </div>
             </li>
             ))}

@@ -73,7 +73,7 @@ class PhoneBook extends React.Component {
             name={this.state.name}
             number={this.state.number}
         />
-<h2>Contacts</h2>
+<h2 className={s.title}>Contacts</h2>
 <Filter filter={this.state.filter} handleFilter={this.handleFilter} />
 <ContactsList contacts={filterContacts} handleDelete={this.handleDelete}/>
 </div>

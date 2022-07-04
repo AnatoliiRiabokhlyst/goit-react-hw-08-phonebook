@@ -1,0 +1,30 @@
+.btn {
+    background-color: #f53602;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.btn:hover {
+    background-color: #fff;
+    color: #f53602;
+}
+.contact_name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f53602;
+    text-align: center;
+    margin-left: 5px;
+}
+.contact_number {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f53602;
+    text-align: center;
+    margin-left: 5px;
+}
+li:not(:last-child) {
+    margin-bottom: 10px;
+}

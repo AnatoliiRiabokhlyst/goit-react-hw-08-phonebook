@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const Filter = ({ filter, handleFilter }) => {
     return (
-        <label>Search contacts
+        <label>Search contacts:
 <input
     onChange={handleFilter}
     value={filter}
