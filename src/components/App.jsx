@@ -8,7 +8,7 @@ export const App = () => {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 20,
-        color: '#010101'
+        color: '#010101' 
       }}
     >
       <PhoneBook/>
