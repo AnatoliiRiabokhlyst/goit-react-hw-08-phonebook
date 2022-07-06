@@ -1,6 +1,6 @@
 import React from "react";
 import { nanoid } from 'nanoid';
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import FormContacts from "../FormContacts";
 import Filter from "../Filter";
 import ContactsList from "../ContactsList";
@@ -9,14 +9,17 @@ import s from "./PhoneBook.module.css";
 
 
 class PhoneBook extends React.Component {
-    static propTypes = {
-        contacts: PropTypes.arrayOf(
-            PropTypes.shape({
-                name: PropTypes.string.isRequired,
-                number: PropTypes.string.isRequired,
-            })
-        ).isRequired,
-    };
+    // static propTypes = {
+    //     contacts: PropTypes.arrayOf(
+    //         PropTypes.shape({
+    //             name: PropTypes.string.isRequired,
+    //             number: PropTypes.string.isRequired,
+    //             id: PropTypes.string.isRequired,
+    //         }),
+    //     ).isRequired,
+    //     setContacts: PropTypes.func.isRequired,
+    // }
+
     state = {
         contacts: [
         {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -28,6 +31,18 @@ class PhoneBook extends React.Component {
         name: '',
         number: ''
     }
+    componentDidMount() {
+    const contacts = localStorage.getItem('contacts') 
+    const parsedContacts = JSON.parse(contacts)
+    if(parsedContacts) {
+    this.setState({contacts: parsedContacts})
+    }
+}
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.contacts !== this.state.contacts) {
+            localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+                }
+            }
         handleSubmit = (e) => {
             e.preventDefault();
             if (this.state.contacts.some(contact => contact.name === this.state.name)) {
