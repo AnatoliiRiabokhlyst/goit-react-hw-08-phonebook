@@ -13,3 +13,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.section{
+  padding: 20px;
+  margin: 0 auto;
+}
+ul{
+  list-style: none;
+}
+input {
+  height: 30px;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #fff;
+  border-color: transparent;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+button:hover {
+  background-color: rgb(18, 18, 220);
+  color: #fff;
+  
+}
+
+p{
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,17 @@
+.number {
+    font-weight: 400;
+    margin-left: 5px;
+}
+.name{
+    font-weight: 500;
+}
+.button {
+    margin-left: auto;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+}
+.wrap{
+    display: flex;
+    flex-direction: column;
+}

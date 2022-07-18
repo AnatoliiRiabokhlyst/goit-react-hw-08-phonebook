@@ -1,24 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import s from './Filter.module.css';
+import { changeFilter } from 'redux/contacts/contacts-actions';
 
-const Filter = ({ filter, handleFilter }) => {
+function Filter() {
+  const dispatch = useDispatch();
+
   return (
-    <label>
-      Search contacts:
+    <div className={s.filter}>
+      <label htmlFor="filter" className={s.title}>
+        {' '}
+        Find contacts by name
+      </label>
       <input
-        onChange={handleFilter}
-        value={filter}
-        type="text"
-        name="filter"
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        required
+        className={s.input}
+        id="filter"
+        onChange={e => dispatch(changeFilter(e.target.value))}
       />
-    </label>
+    </div>
   );
-};
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  handleFilter: PropTypes.func.isRequired,
-};
+}
+
 export default Filter;
