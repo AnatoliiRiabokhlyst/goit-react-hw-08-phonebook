@@ -6,11 +6,11 @@ import s from './ContactList.module.css';
 export default function ContactList({ contacts, deleteContact }) {
   return (
     <ul className={s.list}>
-      {contacts.map(({ name, phone, id }) => (
+      {contacts.map(({ name, number, id }) => (
         <li key={id} className={s.item}>
           <ContactItem
             name={name}
-            number={phone}
+            number={number}
             deleteContact={deleteContact}
             id={id}
           />
