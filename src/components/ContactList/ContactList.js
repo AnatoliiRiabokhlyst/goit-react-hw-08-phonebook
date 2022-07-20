@@ -3,7 +3,7 @@ import ContactItem from './ContactItem';
 import Notification from '../Notification';
 import s from './ContactList.module.css';
 
-export default function ContactList({ contacts, deletContact }) {
+export default function ContactList({ contacts, deleteContact }) {
   return (
     <ul className={s.list}>
       {contacts.map(({ name, phone, id }) => (
@@ -11,7 +11,7 @@ export default function ContactList({ contacts, deletContact }) {
           <ContactItem
             name={name}
             number={phone}
-            deletContact={deletContact}
+            deleteContact={deleteContact}
             id={id}
           />
         </li>
@@ -23,5 +23,5 @@ export default function ContactList({ contacts, deletContact }) {
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  deletContact: PropTypes.func.isRequired,
+  deleteContact: PropTypes.func.isRequired,
 };

@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import { AiOutlineClose } from 'react-icons/ai';
-import s from './ContactItem.module.css'
+import s from './ContactItem.module.css';
 
-
-export default function ContactItem({ name, number, deletContact, id }) {
+export default function ContactItem({ name, number, deleteContact, id }) {
   return (
     <>
       <div className={s.wrap}>
@@ -11,7 +10,7 @@ export default function ContactItem({ name, number, deletContact, id }) {
         <span className={s.number}>{number}</span>
       </div>
       <button
-        onClick={() => deletContact(id)}
+        onClick={() => deleteContact(id)}
         type="button"
         className={s.button}
       >
@@ -21,8 +20,8 @@ export default function ContactItem({ name, number, deletContact, id }) {
   );
 }
 ContactItem.propTypes = {
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    deletContact:PropTypes.func.isRequired,
-}    
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  deleteContact: PropTypes.func.isRequired,
+};

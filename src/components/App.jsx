@@ -12,7 +12,7 @@ import {
 function App() {
   const [filter, setFilter] = useState('');
   const { data, isFetching } = useGetContactsQuery();
-  const [deletContact] = useDeleteContactMutation();
+  const [deleteContact] = useDeleteContactMutation();
   const [addContact] = useAddContactMutation();
 
   const formSubmit = contact => {
@@ -23,15 +23,15 @@ function App() {
     addContact(contact);
   };
 
-  const handleDelet = id => deletContact(id);
+  const handleDelete = id => deleteContact(id);
 
   const filteredContacts = useMemo(() => {
     if (!data) {
       return;
     }
-    const normilizedFilter = filter.toLowerCase();
+    const normalizedFilter = filter.toLowerCase();
     return data.filter(contact =>
-      contact.name.toLowerCase().includes(normilizedFilter)
+      contact.name.toLowerCase().includes(normalizedFilter)
     );
   }, [data, filter]);
 
@@ -43,7 +43,7 @@ function App() {
       <Filter changeFilter={setFilter} />
       <div style={{ position: 'relative' }}>
         {filteredContacts?.length > 0 && (
-          <ContactList contacts={filteredContacts} deletContact={handleDelet} />
+          <ContactList contacts={filteredContacts} deleteContact={handleDelete} />
         )}
         {isFetching && <Loader />}
       </div>
