@@ -1,6 +1,10 @@
+.contactItem{
+    display: flex;
+    justify-content: space-between;
+}
+
 .number {
     font-weight: 400;
-    margin-left: 5px;
 }
 .name{
     font-weight: 500;
@@ -11,7 +15,12 @@
     display: flex;
     align-items: center;
 }
-.wrap{
+.contactWrap{
     display: flex;
     flex-direction: column;
+    width: fit-content;
+}
+.buttonWrap{
+    display: flex;
+    gap: 5px;
 }

@@ -1,52 +1,75 @@
-import { useState, useMemo } from 'react';
-import Loader from './Loader';
-import ContactForm from './ContactForm';
-import ContactList from './ContactList';
-import Filter from './Filter';
-import {
-  useGetContactsQuery,
-  useDeleteContactMutation,
-  useAddContactMutation,
-} from 'redux/contactsAPI';
+import { Routes, Route } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getToken } from 'redux/selectors';
+import { useGetUserQuery } from 'redux/contactsAPI';
+import { ToastContainer } from 'react-toastify';
+import PublicRoute from 'Routs/PublicRoute';
+import PrivateRoute from 'Routs/PrivateRoute';
+
+import { setUser } from 'redux/reducer';
+
+const Header = lazy(() => import('./Header' /* webpackChunkName: "header" */));
+const RegistrationPage = lazy(() =>
+  import('../pages/RegistartionPage' /* webpackChunkName: "registration" */)
+);
+const AuthorizationPage = lazy(() =>
+  import('pages/AuthorizationPage' /* webpackChunkName: "authorization" */)
+);
+const ContactsPage = lazy(() =>
+  import('pages/ContactsPage' /* webpackChunkName: "contacts" */)
+);
 
 function App() {
-  const [filter, setFilter] = useState('');
-  const { data, isFetching } = useGetContactsQuery();
-  const [deleteContact] = useDeleteContactMutation();
-  const [addContact] = useAddContactMutation();
-
-  const formSubmit = contact => {
-    if (data.some(({ name }) => name === contact.name)) {
-      alert(`${contact.name} is already in contacts`);
-      return;
+  const dispatch = useDispatch();
+  const token = useSelector(getToken);
+  const { data } = useGetUserQuery('', { skip: !token });
+  useEffect(() => {
+    if (data) {
+      dispatch(setUser({ user: data }));
     }
-    addContact(contact);
-  };
-
-  const handleDelete = id => deleteContact(id);
-
-  const filteredContacts = useMemo(() => {
-    if (!data) {
-      return;
-    }
-    const normalizedFilter = filter.toLowerCase();
-    return data.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  }, [data, filter]);
+  }, [data, dispatch]);
 
   return (
-    <div className="section">
-      <h1>Phonebook</h1>
-      <ContactForm onSubmit={formSubmit} />
-      <h2>Contacts</h2>
-      <Filter changeFilter={setFilter} />
-      <div style={{ position: 'relative' }}>
-        {filteredContacts?.length > 0 && (
-          <ContactList contacts={filteredContacts} deleteContact={handleDelete} />
-        )}
-        {isFetching && <Loader />}
-      </div>
+    <div>
+      <Suspense fallback={<div>...Loading</div>}>
+        <Header />
+        <Routes>
+          <Route
+            path="/registration"
+            element={
+              <PublicRoute>
+                <RegistrationPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/authorization"
+            element={
+              <PublicRoute>
+                <AuthorizationPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute>
+                <ContactsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <PublicRoute>
+                <RegistrationPage />
+              </PublicRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
+      <ToastContainer theme="colored" autoClose={3000} />
     </div>
   );
 }

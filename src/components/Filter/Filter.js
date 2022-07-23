@@ -5,8 +5,7 @@ export default function Filter({ changeFilter }) {
   return (
     <div className={s.filter}>
       <label htmlFor="filter" className={s.title}>
-        {' '}
-        Find contacts by name
+        Find contacts
       </label>
       <input
         className={s.input}
